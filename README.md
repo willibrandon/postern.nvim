@@ -31,3 +31,14 @@ vim.opt.runtimepath:prepend("~/src/postern/editors/nvim")
 - `plugin/postern.lua` enables the server.
 
 To use another binary, set `cmd` in your own config: `vim.lsp.config("postern", { cmd = { "/path/to/postern" } })`.
+
+## Tests
+
+The specs in `tests/` run under Neovim with busted, the way lazy.nvim and LazyVim test
+themselves. The first run builds busted into `.tests/`. Point `POSTERN_BIN` at a server binary,
+or have `postern` on the `PATH`:
+
+```sh
+cd editors/nvim
+POSTERN_BIN=../../burrito_out/postern_macos_arm64 nvim -l tests/minit.lua --busted
+```
