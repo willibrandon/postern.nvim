@@ -1,3 +1,6 @@
+---@diagnostic disable: undefined-field
+-- `assert` is luassert while the specs run, which the Lua language server cannot see.
+
 -- The server under test is `postern` on the PATH, or POSTERN_BIN.
 local bin = vim.env.POSTERN_BIN or "postern"
 

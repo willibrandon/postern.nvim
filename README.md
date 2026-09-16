@@ -35,8 +35,9 @@ To use another binary, set `cmd` in your own config: `vim.lsp.config("postern", 
 ## Tests
 
 The specs in `tests/` run under Neovim with busted, the way lazy.nvim and LazyVim test
-themselves. The first run builds busted into `.tests/`. Point `POSTERN_BIN` at a server binary,
-or have `postern` on the `PATH`:
+themselves. The first run builds Lua, LuaRocks and busted into `.tests/`, which needs a C
+compiler, Python 3, `unzip` and the readline headers (`libreadline-dev` on Debian and Ubuntu).
+Point `POSTERN_BIN` at a server binary, or have `postern` on the `PATH`:
 
 ```sh
 cd editors/nvim
