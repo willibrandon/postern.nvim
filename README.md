@@ -9,11 +9,14 @@ The server has to be on your `PATH`; binaries are on the
 [releases page](https://github.com/willibrandon/postern/releases).
 
 Highlighting comes from the
-[tree-sitter grammar](https://github.com/willibrandon/tree-sitter-postgresql-conf) once its parser
-is installed, and from Vim's `conf` syntax until then. The plugin tells nvim-treesitter where the
-grammar lives, so `:TSInstall postgresql_conf` installs the parser, or add `postgresql_conf` to
-`ensure_installed`. The queries in `queries/postgresql_conf` give the three filetypes highlights
-and text objects for settings, rules, maps and options.
+[tree-sitter grammar](https://github.com/willibrandon/tree-sitter-postgresql-conf). A parser is a
+compiled library built from the grammar, and nvim-treesitter builds it: `:TSInstall postgresql_conf`
+clones the grammar, compiles it with your C compiler and puts `postgresql_conf.so` under
+`~/.local/share/nvim/site/parser/`. With LazyVim, `ensure_installed = { "postgresql_conf" }` does the
+same on startup. The plugin's part is to tell nvim-treesitter the repository, since the grammar is
+not in its list. Until the parser exists the files fall back to Vim's `conf` syntax. The queries in
+`queries/postgresql_conf` give the three filetypes highlights and text objects for settings, rules,
+maps and options.
 
 ## Install
 
