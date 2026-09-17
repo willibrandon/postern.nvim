@@ -39,9 +39,23 @@ describe("filetypes", function()
     assert.equals("pg-ident", vim.filetype.match({ filename = "pg_ident.conf" }))
   end)
 
+  it("take postgresql.base.conf and an include_dir under a postgresql directory", function()
+    assert.equals("postgresql-conf", vim.filetype.match({ filename = "postgresql.base.conf" }))
+    assert.equals(
+      "postgresql-conf",
+      vim.filetype.match({ filename = "/etc/postgresql/16/main/conf.d/10-memory.conf" })
+    )
+  end)
+
+  it("take a .conf file that starts with a postern comment", function()
+    local bufnr = open("10-memory.conf", "# postern: pg=16\nshared_buffers = 128MB\n")
+    assert.equals("postgresql-conf", vim.bo[bufnr].filetype)
+  end)
+
   it("leave other .conf files alone", function()
     assert.is_true(vim.filetype.match({ filename = "other.conf" }) ~= "postgresql-conf")
     assert.is_true(vim.filetype.match({ filename = "pg_hba_backup.conf" }) ~= "pg-hba")
+    assert.is_true(vim.filetype.match({ filename = "/etc/nginx/conf.d/default.conf" }) ~= "postgresql-conf")
   end)
 
   it("get conf highlighting and a comment string", function()

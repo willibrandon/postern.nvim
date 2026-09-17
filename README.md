@@ -5,6 +5,10 @@ Language support for `postgresql.conf`, `postgresql.auto.conf`, `pg_hba.conf` an
 nvim-lspconfig is not required.
 
 The plugin gives the four files their own filetypes and enables the `postern` server for them.
+It also takes `postgresql.base.conf`, which Patroni keeps the original file as, a `.conf` file
+under a `conf.d` directory below a `postgresql` directory, which is how Debian lays out an
+`include_dir`, and a `.conf` file whose first line is a `# postern:` comment, wherever it is. For
+another layout, add your own pattern with `vim.filetype.add`.
 The server has to be on your `PATH`; binaries are on the
 [releases page](https://github.com/willibrandon/postern/releases).
 
@@ -35,7 +39,8 @@ vim.opt.runtimepath:prepend("~/src/postern/editors/nvim")
 ## Files
 
 - `lsp/postern.lua` is the server definition, read by `vim.lsp.enable`.
-- `ftdetect/postern.lua` maps the four file names to their filetypes.
+- `ftdetect/postern.lua` maps the file names, the `conf.d` pattern and the first-line comment to
+  their filetypes.
 - `syntax/*.vim` loads Vim's `conf` highlighting for each filetype, and `ftplugin/*.lua` sets
   the comment string and starts tree-sitter highlighting when a parser is installed.
 - `queries/postgresql_conf/*.scm` are the tree-sitter queries.
