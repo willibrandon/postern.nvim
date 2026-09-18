@@ -24,7 +24,17 @@ maps and options.
 
 ## Install
 
-With lazy.nvim, point a spec at this directory in a checkout of the repository:
+The plugin is developed in `editors/nvim` of the
+[postern repository](https://github.com/willibrandon/postern), which takes issues and changes,
+and each release publishes it on its own as
+[willibrandon/postern.nvim](https://github.com/willibrandon/postern.nvim), which a plugin manager
+takes by name; with lazy.nvim:
+
+```lua
+{ "willibrandon/postern.nvim" }
+```
+
+From a checkout of the main repository, point a spec at this directory instead:
 
 ```lua
 { dir = "~/src/postern/editors/nvim" }
@@ -38,7 +48,8 @@ vim.opt.runtimepath:prepend("~/src/postern/editors/nvim")
 
 ## Files
 
-- `lsp/postern.lua` is the server definition, read by `vim.lsp.enable`.
+- `lsp/postern.lua` is the server definition, read by `vim.lsp.enable`, and `lua/postern/init.lua`
+  finds the binary and fetches one for `:PosternInstall`.
 - `ftdetect/postern.lua` maps the file names, the `conf.d` pattern and the first-line comment to
   their filetypes.
 - `syntax/*.vim` loads Vim's `conf` highlighting for each filetype, and `ftplugin/*.lua` sets
