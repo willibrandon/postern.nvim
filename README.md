@@ -60,6 +60,20 @@ vim.opt.runtimepath:prepend("~/src/postern/editors/nvim")
 
 To use another binary, set `cmd` in your own config: `vim.lsp.config("postern", { cmd = { "/path/to/postern" } })`.
 
+## Settings
+
+The server's options go in `init_options`:
+
+```lua
+vim.lsp.config("postern", { init_options = { pg = 16, reportTrust = false } })
+```
+
+| Option             | Default | Description                                                                                                                                                                                     |
+| ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pg`               | newest  | PostgreSQL major version, 13 to 18, for offline checks. A `# postern: pg=16` comment at the top of a file overrides it.                                                                         |
+| `connectionString` | none    | `postgres://` URL of a server to check the open files against. Without it, `PGHOST` and the other libpq variables in the server's environment are used when set.                               |
+| `reportTrust`      | `true`  | Hint on `pg_hba.conf` rules that use `trust` or `password` on a non-local address. Loopback and `samehost` are never reported, and the quick fix on a hint turns this off until the server restarts. |
+
 ## Tests
 
 The specs in `tests/` run under Neovim with busted, the way lazy.nvim and LazyVim test
